@@ -11,12 +11,19 @@ const Hero = () => {
 
   // Set initial states before paint to prevent flash
   useLayoutEffect(() => {
+    // Background vectors
     gsap.set([vectorRightRef.current, vectorLeftRef.current], {
       opacity: 0,
       x: 0,
       rotationY: 0,
       scale: 0.9,
     });
+
+    // Profile
+    gsap.set(elementsRef.current[0], { opacity: 0, scale: 0.75, rotationY: 35 });
+
+    // Intro
+    gsap.set(elementsRef.current[1], { opacity: 0, y: 18, rotationX: 18 });
 
     // Heading words
     if (elementsRef.current[2]) {
@@ -27,9 +34,10 @@ const Hero = () => {
       });
     }
 
-    gsap.set(elementsRef.current[0], { opacity: 0, scale: 0.75, rotationY: 35 });
-    gsap.set(elementsRef.current[1], { opacity: 0, y: 18, rotationX: 18 });
+    // Paragraph
     gsap.set(elementsRef.current[3], { opacity: 0, y: 28 });
+
+    // Button
     gsap.set(elementsRef.current[4], { opacity: 0, y: 14, scale: 0.94 });
   }, []);
 
@@ -45,7 +53,6 @@ const Hero = () => {
       tl.to(vectorRightRef.current, { opacity: 1, x: 0, rotationY: 0, scale: 1, duration: 1.6 })
         .to(vectorLeftRef.current, { opacity: 1, x: 0, rotationY: 0, scale: 1, duration: 1.6 }, 0.2)
         .call(() => {
-          // Floating loop
           gsap.to(vectorRightRef.current, { y: 14, duration: 6, yoyo: true, repeat: -1, ease: "sine.inOut" });
           gsap.to(vectorLeftRef.current, { y: -14, duration: 6, yoyo: true, repeat: -1, ease: "sine.inOut" });
         }, null, "+=0.2");
@@ -98,18 +105,18 @@ const Hero = () => {
             </div>
 
             {/* Heading */}
-            <div className="space-y-4 ">
+            <div className="space-y-4">
               <div ref={(el) => (elementsRef.current[2] = el)} className="md:leading-[110%] leading-[220%]">
                 <h1 className="font-semibold text-[30px] xs:text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-[6xl] tracking-tighter text-gray-900 dark:text-white md:space-y-3">
                   {["Designing", "Digital"].map((word, i) => (
-                    <span key={i} className="word inline-block mr-1" style={{ opacity: 0, transform: "translateY(46px) rotateX(60deg)" }}>{word}</span>
+                    <span key={i} className="word inline-block mr-1">{word}</span>
                   ))}
                   <br />
                   {["Experiences", "that", "Convert", "&"].map((word, i) => (
-                    <span key={i} className="word inline-block mr-1" style={{ opacity: 0, transform: "translateY(46px) rotateX(60deg)" }}>{word}</span>
+                    <span key={i} className="word inline-block mr-1">{word}</span>
                   ))}
                   <br className="hidden md:flex"/>
-                  <span className="word inline-block mr-1" style={{ opacity: 0, transform: "translateY(46px) rotateX(60deg)" }}>Communicate</span>
+                  <span className="word inline-block mr-1">Communicate</span>
                 </h1>
               </div>
 

@@ -21,16 +21,20 @@ const imgVariant = {
 
 export default function ProjectDetail({ params }) {
   const { id } = React.use(params);
-
   const project = projects.find((p) => p.id === parseInt(id));
 
   const [lightboxImg, setLightboxImg] = useState(null);
+  const [loadedImages, setLoadedImages] = useState({}); // Track which images are loaded
 
   // Disable scroll when lightbox is open
   useEffect(() => {
     document.body.style.overflow = lightboxImg ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
   }, [lightboxImg]);
+
+  const handleImageLoad = (idx) => {
+    setLoadedImages((prev) => ({ ...prev, [idx]: true }));
+  };
 
   if (!project) {
     return (
@@ -53,10 +57,10 @@ export default function ProjectDetail({ params }) {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-2xl font-semibold tracking-tighter text-black dark:text-white">
-            {project.title}
+            {project.title || <Skeleton width="200px" height="28px" />}
           </h1>
           <p className="md:text-xl text-sm text-gray-700 dark:text-gray-300">
-            {project.date}
+            {project.date || <Skeleton width="100px" height="20px" />}
           </p>
         </motion.div>
 
@@ -68,7 +72,7 @@ export default function ProjectDetail({ params }) {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xl text-gray-800 dark:text-gray-300">
-            {project.description}
+            {project.description || <Skeleton width="80%" height="20px" />}
           </p>
 
           <div className="flex items-center gap-2 flex-wrap mt-2 md:mt-0">
@@ -83,16 +87,21 @@ export default function ProjectDetail({ params }) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
               >
-                {tool.icon && (
-                  <Image
-                    src={tool.icon}
-                    alt={tool.name}
-                    width={16}
-                    height={16}
-                    className="object-contain"
-                  />
-                )}
-                <span className="text-black dark:text-white">{tool.name}</span>
+                {tool.icon ? (
+                  loadedImages[`tool-${idx}`] ? (
+                    <Image
+                      src={tool.icon}
+                      alt={tool.name}
+                      width={16}
+                      height={16}
+                      className="object-contain"
+                      onLoad={() => handleImageLoad(`tool-${idx}`)}
+                    />
+                  ) : (
+                    <Skeleton width="16px" height="16px" />
+                  )
+                ) : null}
+                <span className="text-black dark:text-white">{tool.name || <Skeleton width="40px" height="12px" />}</span>
               </motion.div>
             ))}
           </div>
@@ -116,7 +125,7 @@ export default function ProjectDetail({ params }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
-              {role}
+              {role || <Skeleton width="80px" height="16px" />}
             </motion.span>
           ))}
         </motion.div>
@@ -138,7 +147,7 @@ export default function ProjectDetail({ params }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {project.roleDescription}
+              {project.roleDescription || <Skeleton width="90%" height="16px" />}
             </motion.p>
           </motion.div>
         )}
@@ -160,6 +169,7 @@ export default function ProjectDetail({ params }) {
                 variants={imgVariant}
                 onClick={() => setLightboxImg(img.src)}
               >
+                {!loadedImages[`img-${idx}`] && <Skeleton className="absolute inset-0 w-full h-full" />}
                 <Image
                   src={img.src}
                   alt={`${project.title} ${idx + 1}`}
@@ -169,6 +179,7 @@ export default function ProjectDetail({ params }) {
                   priority={idx === 0}
                   loading={idx === 0 ? "eager" : "lazy"}
                   className="w-full h-auto object-cover"
+                  onLoad={() => handleImageLoad(`img-${idx}`)}
                 />
               </motion.div>
             ))
@@ -180,6 +191,7 @@ export default function ProjectDetail({ params }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
             >
+              {!loadedImages.cover && <Skeleton className="absolute inset-0 w-full h-full" />}
               <Image
                 src={project.coverImage}
                 alt={project.title}
@@ -189,6 +201,7 @@ export default function ProjectDetail({ params }) {
                 priority
                 loading="eager"
                 className="w-full h-auto object-cover"
+                onLoad={() => handleImageLoad("cover")}
               />
             </motion.div>
           )}
@@ -196,48 +209,45 @@ export default function ProjectDetail({ params }) {
       </div>
 
       {/* Lightbox */}
-     <AnimatePresence>
-  {lightboxImg && (
-    <motion.div
-      key="overlay"
-      className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      onClick={() => setLightboxImg(null)} // clicking outside closes
-    >
-      {/* Cancel Button */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation(); // prevent overlay click
-          setLightboxImg(null);
-        }}
-        className="absolute top-10 right-5 md:right-[5%] text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 transition z-50"
-      >
-        <X size={20} />
-      </button>
+      <AnimatePresence>
+        {lightboxImg && (
+          <motion.div
+            key="overlay"
+            className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            onClick={() => setLightboxImg(null)}
+          >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxImg(null);
+              }}
+              className="absolute top-10 right-5 md:right-[5%] text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 transition z-50"
+            >
+              <X size={20} />
+            </button>
 
-      {/* Image Container */}
-      <motion.div
-        onClick={(e) => e.stopPropagation()} // prevent overlay click when clicking image
-        initial={{ opacity: 0, scale: 0.9, y: 50 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.9, y: 50 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="relative w-[90vw] h-[90vh]"
-      >
-        <Image
-          src={lightboxImg}
-          alt="Enlarged view"
-          fill
-          className="object-contain rounded-lg shadow-lg pointer-events-none"
-        />
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.9, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 50 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="relative w-[90vw] h-[90vh]"
+            >
+              <Image
+                src={lightboxImg}
+                alt="Enlarged view"
+                fill
+                className="object-contain rounded-lg shadow-lg pointer-events-none"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Contact Section */}
       <motion.div
@@ -250,3 +260,11 @@ export default function ProjectDetail({ params }) {
     </div>
   );
 }
+
+// Simple Skeleton component
+const Skeleton = ({ width = "100%", height = "16px", className = "" }) => (
+  <div
+    className={`bg-gray-300 dark:bg-gray-700 animate-pulse rounded ${className}`}
+    style={{ width, height }}
+  />
+);
