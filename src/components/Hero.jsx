@@ -100,7 +100,7 @@ const Hero = () => {
             {/* Heading */}
             <div className="space-y-4 ">
               <div ref={(el) => (elementsRef.current[2] = el)} className="md:leading-[110%] leading-[220%]">
-                <h1 className="font-semibold text-[30px] xs:text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-[6xl] tracking-tighter text-gray-900 dark:text-white md:space-y-4">
+                <h1 className="font-semibold text-[30px] xs:text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-[6xl] tracking-tighter text-gray-900 dark:text-white md:space-y-3">
                   {["Designing", "Digital"].map((word, i) => (
                     <span key={i} className="word inline-block mr-1" style={{ opacity: 0, transform: "translateY(46px) rotateX(60deg)" }}>{word}</span>
                   ))}
@@ -108,7 +108,7 @@ const Hero = () => {
                   {["Experiences", "that", "Convert", "&"].map((word, i) => (
                     <span key={i} className="word inline-block mr-1" style={{ opacity: 0, transform: "translateY(46px) rotateX(60deg)" }}>{word}</span>
                   ))}
-                  <br />
+                  <br className="hidden md:flex"/>
                   <span className="word inline-block mr-1" style={{ opacity: 0, transform: "translateY(46px) rotateX(60deg)" }}>Communicate</span>
                 </h1>
               </div>

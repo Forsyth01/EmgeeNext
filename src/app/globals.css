@@ -2,12 +2,15 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-*{
+* {
   scroll-behavior: smooth;
-   font-family: "Poppins", sans-serif;
-   /* overflow-x: hidden; */
-   overflow-x: initial;
+  font-family: "Poppins", sans-serif;
 }
-button{
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+button {
   cursor: pointer;
 }
