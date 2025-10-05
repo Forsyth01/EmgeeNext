@@ -34,7 +34,7 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 mt-6 place-items-center">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div
               key={project.id}
               className="cursor-pointer hover:-translate-y-1 transition-transform duration-500"
@@ -49,7 +49,10 @@ export default function Projects() {
                       width={400}
                       height={300}
                       className="object-cover rounded-t-2xl h-70 w-100"
-                      priority // loads image immediately
+                      priority={index === 0} // only first image loads immediately
+                      loading={index === 0 ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL="/images/placeholder.png" // tiny blurred version
                     />
                   </div>
 
