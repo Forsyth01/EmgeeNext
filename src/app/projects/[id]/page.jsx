@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { projects } from "../../../../data/projects";
@@ -10,9 +10,7 @@ import Image from "next/image";
 // Stagger container for gallery
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 // Individual image animation
@@ -22,7 +20,8 @@ const imgVariant = {
 };
 
 export default function ProjectDetail({ params }) {
-  const { id } = params;
+  const { id } = React.use(params);
+
   const project = projects.find((p) => p.id === parseInt(id));
 
   const [lightboxImg, setLightboxImg] = useState(null);
@@ -50,8 +49,7 @@ export default function ProjectDetail({ params }) {
         <motion.div
           className="flex items-center justify-between md:pb-2"
           initial={{ opacity: 0, y: -18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-2xl font-semibold tracking-tighter text-black dark:text-white">
@@ -66,8 +64,7 @@ export default function ProjectDetail({ params }) {
         <motion.div
           className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-4"
           initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
         >
           <p className="text-xl text-gray-800 dark:text-gray-300">
@@ -83,8 +80,7 @@ export default function ProjectDetail({ params }) {
                 key={idx}
                 className="flex items-center gap-1 py-1 bg-white dark:bg-gray-800 px-2 rounded-full text-sm"
                 initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.25 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
               >
                 {tool.icon && (
@@ -106,8 +102,7 @@ export default function ProjectDetail({ params }) {
         <motion.div
           className="flex gap-2 py-4 flex-wrap"
           initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-xl font-semibold tracking-tighter text-black dark:text-white">
@@ -118,8 +113,7 @@ export default function ProjectDetail({ params }) {
               key={idx}
               className="text-xl tracking-tight text-gray-800 dark:text-gray-300"
               initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               {role}
@@ -132,8 +126,7 @@ export default function ProjectDetail({ params }) {
           <motion.div
             className="py-4"
             initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-xl font-semibold tracking-tighter text-black dark:text-white">
@@ -142,8 +135,7 @@ export default function ProjectDetail({ params }) {
             <motion.p
               className="text-md mb-6 text-gray-800 dark:text-gray-300 whitespace-pre-line"
               initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
               {project.roleDescription}
@@ -151,20 +143,19 @@ export default function ProjectDetail({ params }) {
           </motion.div>
         )}
 
-        {/* Gallery */}
+        {/* Full-Width Gallery */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 gap-y-6"
-          variants={containerVariants}
+          className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          animate="visible"
+          variants={containerVariants}
         >
-          {project.images && project.images.length > 0 ? (
+          {(project.images?.length ?? 0) > 0 ? (
             project.images.map((img, idx) => (
               <motion.div
                 key={idx}
-                className={`rounded-lg shadow-lg overflow-hidden relative ${
-                  img.span ? "md:col-span-2" : "md:col-span-1"
+                className={`rounded-lg shadow-lg overflow-hidden relative mb-4 cursor-pointer ${
+                  img.span ? "col-span-1 md:col-span-2" : "col-span-1"
                 }`}
                 variants={imgVariant}
                 onClick={() => setLightboxImg(img.src)}
@@ -172,27 +163,32 @@ export default function ProjectDetail({ params }) {
                 <Image
                   src={img.src}
                   alt={`${project.title} ${idx + 1}`}
-                  width={800}
-                  height={600}
-                  className="cursor-pointer transition-opacity duration-500 object-cover"
+                  width={img.span ? 1920 : 1200}
+                  height={img.span ? 1080 : 720}
+                  sizes={img.span ? "100vw" : "(max-width: 768px) 100vw, 90vw"}
+                  priority={idx === 0}
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  className="w-full h-auto object-cover"
                 />
               </motion.div>
             ))
           ) : (
             <motion.div
-              className="rounded-lg shadow-lg cursor-pointer relative"
+              className="w-full rounded-lg shadow-lg cursor-pointer relative mb-4"
               onClick={() => setLightboxImg(project.coverImage)}
               initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.25 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
             >
               <Image
                 src={project.coverImage}
                 alt={project.title}
-                width={800}
-                height={600}
-                className="rounded-lg shadow-lg object-cover"
+                width={1200}
+                height={720}
+                sizes="(max-width: 768px) 100vw, 90vw"
+                priority
+                loading="eager"
+                className="w-full h-auto object-cover"
               />
             </motion.div>
           )}
@@ -243,8 +239,7 @@ export default function ProjectDetail({ params }) {
       {/* Contact Section */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <Contact />

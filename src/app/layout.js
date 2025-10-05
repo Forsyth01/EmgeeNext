@@ -1,16 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 
-// --- Fonts ---
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// --- Font ---
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // optional, choose the weights you need
 });
 
 // --- Metadata (SEO, favicon, etc.) ---
@@ -19,7 +15,7 @@ export const metadata = {
   description:
     "Emgee is a UI/UX designer and graphic designer with 5 years of experience creating engaging, user-focused digital and visual designs.",
   icons: {
-    icon: "/images/profilepic.png", // make sure this image is in your /public/images folder
+    icon: "/images/profilepic.png",
   },
 };
 
@@ -46,9 +42,7 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${poppins.variable} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

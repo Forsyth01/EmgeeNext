@@ -7,7 +7,7 @@ const Hero = () => {
   const vectorLeftRef = useRef(null);
   const elementsRef = useRef([]); // [profile, intro, headingContainer, paragraph, button]
 
-  // 🚀 Prevent flash by setting initial states before paint
+  // Prevent flash by setting initial states before paint
   useLayoutEffect(() => {
     gsap.set([vectorRightRef.current, vectorLeftRef.current], {
       opacity: 0,
@@ -38,7 +38,7 @@ const Hero = () => {
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // Backgrounds
+      // Background vectors animation
       tl.to(vectorRightRef.current, {
         opacity: 1,
         x: 0,
@@ -75,14 +75,14 @@ const Hero = () => {
         });
       }, null, "+=0.2");
 
-      // Profile
+      // Profile animation
       tl.to(
         elementsRef.current[0],
         { opacity: 1, scale: 1, rotationY: 0, duration: 1 },
         0.6
       );
 
-      // Intro
+      // Intro text
       tl.to(
         elementsRef.current[1],
         { opacity: 1, y: 0, rotationX: 0, duration: 1 },
@@ -124,28 +124,27 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="bg-[#F5F8E9] dark:bg-[#1A1A19] transition-colors duration-700 relative 
-perspective-[1200px]"
+      className="bg-[#F5F8E9] dark:bg-[#1A1A19] transition-colors duration-700 relative perspective-[1200px]"
     >
       {/* Background graphics */}
       <div
         ref={vectorRightRef}
-        className="hidden lg:flex absolute right-0 top-0 group " 
+        className="hidden lg:flex absolute right-0 top-0 group opacity-0"
       >
         <img
           src="images/Vector.png"
           alt=""
-          className="transition-transform duration-500 ease-in-out  "
+          className="transition-transform duration-500 ease-in-out"
         />
       </div>
       <div
         ref={vectorLeftRef}
-        className="hidden xl:flex absolute left-0 bottom-0 group"
+        className="hidden xl:flex absolute left-0 bottom-0 group opacity-0"
       >
         <img
           src="images/Vector2.png"
           alt=""
-          className="transition-transform duration-500 ease-in-out group-hover:-rotate-6 "
+          className="transition-transform duration-500 ease-in-out group-hover:-rotate-6"
         />
       </div>
 
@@ -156,21 +155,20 @@ perspective-[1200px]"
             {/* Profile */}
             <div
               ref={(el) => (elementsRef.current[0] = el)}
-              className="rounded-xl mt-6 xs:mt-8 sm:mt-10 inline-block"
+              className="rounded-xl mt-6 xs:mt-8 sm:mt-10 inline-block opacity-0"
             >
               <img
                 src="/images/profilepic.png"
                 alt="George profile"
-                className="hidden md:flex h-50 w-50 xs:h-60 sm:w-20 md:h-24 md:w-24 
-                 max-h-[20vw] max-w-[20vw] min-h-[60px] min-w-[60px] 
-                 object-cover rounded-xl
-                 transition-transform duration-300 ease-in-out 
-                 hover:scale-105 cursor-pointer"
+                className="hidden md:flex h-50 w-50 xs:h-60 sm:w-20 md:h-24 md:w-24 max-h-[20vw] max-w-[20vw] min-h-[60px] min-w-[60px] object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
               />
             </div>
 
             {/* Intro */}
-            <div ref={(el) => (elementsRef.current[1] = el)}>
+            <div
+              ref={(el) => (elementsRef.current[1] = el)}
+              className="opacity-0"
+            >
               <p className="font-medium text-lg md:text-[24px] text-gray-900 dark:text-white tracking-tight">
                 Hi, I’m George 👋
               </p>
@@ -183,19 +181,22 @@ perspective-[1200px]"
                 className="md:leading-[110%] leading-[220%]"
               >
                 <h1 className="font-semibold text-[30px] xs:text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-[6xl] tracking-tighter text-gray-900 dark:text-white md:space-y-[15px]">
-                  <span className="word inline-block mr-1">Designing</span>
-                  <span className="word inline-block mr-1">Digital</span>
+                  <p className="word inline-block mr-1 opacity-0">Designing</p>
+                  <p className="word inline-block mr-1 opacity-0">Digital</p>
                   <br />
-                  <span className="word inline-block mr-1">Experiences</span>
-                  <span className="word inline-block mr-1">that</span>
-                  <span className="word inline-block mr-1">Convert</span>
-                  <span className="word inline-block mr-1">&</span>
+                  <p className="word inline-block mr-1 opacity-0">Experiences</p>
+                  <p className="word inline-block mr-1 opacity-0">that</p>
+                  <p className="word inline-block mr-1 opacity-0">Convert</p>
+                  <p className="word inline-block mr-1 opacity-0">&</p>
                   <br className="hidden sm:flex 2xl:hidden" />
-                  <span className="word inline-block mr-1">Communicate</span>
+                  <p className="word inline-block mr-1 opacity-0">Communicate</p>
                 </h1>
               </div>
 
-              <div ref={(el) => (elementsRef.current[3] = el)}>
+              <div
+                ref={(el) => (elementsRef.current[3] = el)}
+                className="opacity-0"
+              >
                 <p className="font-regular text-[12px] xs:text-sm sm:text-base md:text-lg lg:text-md xl:text-md text-gray-700 dark:text-gray-300 max-w-[90%] sm:max-w-2xl mx-auto">
                   A UI/UX and Graphic Designer helping brands stand out through
                   clean, user-focused visuals and strategy.
@@ -206,13 +207,10 @@ perspective-[1200px]"
             {/* Button */}
             <div
               ref={(el) => (elementsRef.current[4] = el)}
-              className="flex gap-4 justify-center mt-4"
+              className="flex gap-4 justify-center mt-4 opacity-0"
             >
               <button className="group flex items-center gap-2 rounded-full bg-[#C2DE3A] hover:bg-[#d0e75e] px-8 py-2 tracking-tighter transition-all duration-300 ease-in-out text-gray-900 dark:text-black">
-                <a
-                  href="mailto:georgekyrian@gmail.com"
-                  className="flex items-center gap-2"
-                >
+                <a href="mailto:georgekyrian@gmail.com" className="flex items-center gap-2">
                   <span className="font-medium">Hire Me</span>
                 </a>
               </button>
