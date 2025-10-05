@@ -1,39 +1,35 @@
-// ProjectDetail.jsx
-import { useParams } from "react-router-dom";
-import { projects } from "../data/projects";
-import Contact from "./Contact";
-import { AnimatePresence, motion } from "framer-motion";
-import BackAndToggleButton from "./BackAndToggleButton";
+// app/projects/[id]/page.jsx (Next.js 13+ App Router)
+"use client";
+
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { projects } from "../../../data/projects";
+import Contact from "@/components/Contact";
+import BackAndToggleButton from "@/components/BackAndToggleButton";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-// Stagger container for gallery
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
-// Individual image animation
 const imgVariant = {
   hidden: { opacity: 0, scale: 0.95, y: 20 },
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.55 } },
 };
 
-const ProjectDetail = () => {
-  const { id } = useParams();
+const ProjectDetail = ({ params }) => {
+  const { id } = params; // Next.js dynamic route param
   const project = projects.find((p) => p.id === parseInt(id));
-  const [lightboxImg, setLightboxImg] = useState(null); // Track clicked image
-  const [loaded, setLoaded] = useState({}); // track loaded state for all images
+
+  const [lightboxImg, setLightboxImg] = useState(null);
+  const [loaded, setLoaded] = useState({});
 
   // Disable scroll when lightbox is open
   useEffect(() => {
-    if (lightboxImg) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = lightboxImg ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
   }, [lightboxImg]);
 
@@ -86,10 +82,12 @@ const ProjectDetail = () => {
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
               >
                 {tool.icon && (
-                  <img
+                  <Image
                     src={tool.icon}
-                    className="object-contain w-4 h-4"
                     alt={tool.name}
+                    width={16}
+                    height={16}
+                    className="object-contain"
                   />
                 )}
                 <span className="text-black dark:text-white">{tool.name}</span>
@@ -136,7 +134,7 @@ const ProjectDetail = () => {
               Read Description:
             </h2>
             <motion.p
-              className="text-md mb-6 text-gray-800 dark:text-gray-300 whitespace-pre-line "
+              className="text-md mb-6 text-gray-800 dark:text-gray-300 whitespace-pre-line"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
@@ -147,7 +145,7 @@ const ProjectDetail = () => {
           </motion.div>
         )}
 
-        {/* Gallery with Lazy Loading */}
+        {/* Gallery */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 gap-y-6"
           variants={containerVariants}
@@ -170,27 +168,35 @@ const ProjectDetail = () => {
                     <span className="text-gray-500">Loading...</span>
                   </div>
                 )}
-                <img
+                <Image
                   src={img.src}
                   alt={`${project.title} ${idx + 1}`}
-                  loading="lazy" // ✅ native lazy loading
-                  onLoad={() => setLoaded((prev) => ({ ...prev, [idx]: true }))}
-                  className=" cursor-pointer transition-opacity duration-500"
+                  width={800}
+                  height={600}
+                  className="cursor-pointer transition-opacity duration-500"
+                  onLoadingComplete={() =>
+                    setLoaded((prev) => ({ ...prev, [idx]: true }))
+                  }
                 />
               </motion.div>
             ))
           ) : (
-            <motion.img
-              src={project.coverImage}
-              alt={project.title}
+            <motion.div
               className="rounded-lg shadow-lg cursor-pointer"
-              loading="lazy"
               onClick={() => setLightboxImg(project.coverImage)}
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.6 }}
-            />
+            >
+              <Image
+                src={project.coverImage}
+                alt={project.title}
+                width={800}
+                height={600}
+                className="rounded-lg shadow-lg cursor-pointer"
+              />
+            </motion.div>
           )}
         </motion.div>
       </div>
@@ -217,18 +223,21 @@ const ProjectDetail = () => {
               <X size={20} />
             </button>
 
-            <motion.img
-              key="lightboxImg"
-              src={lightboxImg}
-              alt="Enlarged view"
-              className="max-h-[90%] max-w-[90%] rounded-lg shadow-lg"
+            <motion.div
               onClick={(e) => e.stopPropagation()}
-              loading="lazy" // ✅ even lightbox image lazy loaded
               initial={{ opacity: 0, scale: 0.9, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-            />
+              className="max-h-[90%] max-w-[90%] relative"
+            >
+              <Image
+                src={lightboxImg}
+                alt="Enlarged view"
+                fill
+                className="object-contain rounded-lg shadow-lg"
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
