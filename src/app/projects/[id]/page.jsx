@@ -196,45 +196,48 @@ export default function ProjectDetail({ params }) {
       </div>
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxImg && (
-          <motion.div
-            key="overlay"
-            className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50"
-            onClick={() => setLightboxImg(null)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxImg(null);
-              }}
-              className="absolute top-10 right-5 md:right-[5%] text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 transition"
-            >
-              <X size={20} />
-            </button>
+     <AnimatePresence>
+  {lightboxImg && (
+    <motion.div
+      key="overlay"
+      className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      onClick={() => setLightboxImg(null)} // clicking outside closes
+    >
+      {/* Cancel Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // prevent overlay click
+          setLightboxImg(null);
+        }}
+        className="absolute top-10 right-5 md:right-[5%] text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 transition z-50"
+      >
+        <X size={20} />
+      </button>
 
-            <motion.div
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 50 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="max-h-[90%] max-w-[90%] relative"
-            >
-              <Image
-                src={lightboxImg}
-                alt="Enlarged view"
-                fill
-                className="object-contain rounded-lg shadow-lg"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Image Container */}
+      <motion.div
+        onClick={(e) => e.stopPropagation()} // prevent overlay click when clicking image
+        initial={{ opacity: 0, scale: 0.9, y: 50 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 50 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative w-[90vw] h-[90vh]"
+      >
+        <Image
+          src={lightboxImg}
+          alt="Enlarged view"
+          fill
+          className="object-contain rounded-lg shadow-lg pointer-events-none"
+        />
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
 
       {/* Contact Section */}
       <motion.div
