@@ -15,7 +15,7 @@ export const metadata = {
   title: "George",
   description:
     "Emgee is a UI/UX designer and graphic designer with 5 years of experience creating engaging, user-focused digital and visual designs.",
- icons: {
+  icons: {
     icon: "/favicon.png", // ✅ Now points to root
   },
 };
@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+         <link rel="icon" href="/favicon.png" sizes="any" />
         {/* Dark Mode Script */}
         <script
           dangerouslySetInnerHTML={{
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
 
       <body className={`${poppins.variable} antialiased`}>
         <ThemeProvider>{children}
-          <Footer/>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

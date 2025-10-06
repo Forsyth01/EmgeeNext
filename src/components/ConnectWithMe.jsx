@@ -34,7 +34,7 @@ const Connectwithme = () => {
     {
       name: "Whatsapp",
       icon: "/assets/icons/whatsapp.png",
-      url: "https://http://Wa.me/+2349069578083",
+      url: "https://wa.me/2349069578083",
     },
   ];
 
