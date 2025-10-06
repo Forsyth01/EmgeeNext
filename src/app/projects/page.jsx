@@ -27,14 +27,15 @@ export default function Projects() {
       initial="hidden"
       animate="visible"
     >
+      {/* Back button and toggle */}
       <BackAndToggleButton />
 
       {/* Decorative image */}
       <motion.div
         className="absolute right-0 top-15 lg:block hidden pt-4 cursor-pointer"
-             initial={{ opacity: 0, }}
-          animate={{ opacity: 1, }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Image
           src="/images/penproject.png"
@@ -42,6 +43,7 @@ export default function Projects() {
           width={224}
           height={224}
           className="h-56 w-auto"
+          priority
         />
       </motion.div>
 
@@ -52,7 +54,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-           variants={containerVariants}
+          variants={containerVariants}
         >
           <h1 className="dark:text-white">
             Check out some of my works <br />
@@ -82,10 +84,10 @@ export default function Projects() {
                       width={400}
                       height={300}
                       className="object-cover rounded-t-2xl h-70 w-100"
-                      priority={index === 0} // only first image loads immediately
+                      priority={index === 0}
                       loading={index === 0 ? "eager" : "lazy"}
-                      placeholder="blur"
-                      blurDataURL="/images/placeholder.png" // tiny blurred version
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      // Removed blur to prevent random load failures
                     />
                   </div>
 

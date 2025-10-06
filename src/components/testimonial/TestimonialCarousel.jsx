@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Marquee from "react-fast-marquee";
+import Image from "next/image";
 
 const TestimonialCarousel = () => {
   return (
@@ -7,7 +10,14 @@ const TestimonialCarousel = () => {
       {/* Left Side Text */}
       <div className="hidden lg:flex lg:relative lg:left-[5%] text-center md:text-left lg:w-[45%] xl:w-[40%]">
         <div>
-          <img src="/images/quote.png" alt="" className="h-30 my-2" />
+          <Image
+            src="/images/quote.png"
+            alt="Quote Icon"
+            width={60}
+            height={60}
+            className="h-30 my-2 w-auto"
+            loading="lazy"
+          />
           <h1 className="text-[38px] leading-[1.1] font-semibold tracking-tighter text-white">
             What Our <br /> Clients <br /> say about us
           </h1>
@@ -15,7 +25,7 @@ const TestimonialCarousel = () => {
       </div>
 
       {/* Marquee Section */}
-      <div className="w-full overflow-hidden"> {/* containment without collapsing */}
+      <div className="w-full overflow-hidden">
         <Marquee
           loop={0}
           autoFill={true}
@@ -24,21 +34,36 @@ const TestimonialCarousel = () => {
           gradientColor={[26, 26, 25]} // matches dark mode background (#1A1A19)
         >
           <div className="flex">
-            <img
-              src="/images/Testimonial card 1.png"
-              alt="Testimonial 1"
-              className="mx-2 cursor-text h-[412px]"
-            />
-            <img
-              src="/images/Testimonial card 2.png"
-              alt="Testimonial 2"
-              className="mx-2 cursor-text h-[412px]"
-            />
-            <img
-              src="/images/Testimonial card 3.png"
-              alt="Testimonial 3"
-              className="mx-2 cursor-text h-[412px]"
-            />
+            <div className="mx-2 cursor-text h-[412px] relative w-[auto]">
+              <Image
+                src="/images/Testimonial card 1.png"
+                alt="Testimonial 1"
+                width={350}
+                height={412}
+                className="object-contain h-[412px] w-auto"
+                loading="lazy"
+              />
+            </div>
+            <div className="mx-2 cursor-text h-[412px] relative w-[auto]">
+              <Image
+                src="/images/Testimonial card 2.png"
+                alt="Testimonial 2"
+                width={350}
+                height={412}
+                className="object-contain h-[412px] w-auto"
+                loading="lazy"
+              />
+            </div>
+            <div className="mx-2 cursor-text h-[412px] relative w-[auto]">
+              <Image
+                src="/images/Testimonial card 3.png"
+                alt="Testimonial 3"
+                width={350}
+                height={412}
+                className="object-contain h-[412px] w-auto"
+                loading="lazy"
+              />
+            </div>
           </div>
         </Marquee>
       </div>

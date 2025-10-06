@@ -15,8 +15,8 @@ export const metadata = {
   title: "George",
   description:
     "Emgee is a UI/UX designer and graphic designer with 5 years of experience creating engaging, user-focused digital and visual designs.",
-  icons: {
-    icon: "/images/profilepic.png",
+ icons: {
+    icon: "/favicon.png", // ✅ Now points to root
   },
 };
 
