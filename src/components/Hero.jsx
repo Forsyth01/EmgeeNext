@@ -79,10 +79,10 @@ const Hero = () => {
   return (
     <section ref={heroRef} className="bg-[#F5F8E9] dark:bg-[#1A1A19] transition-colors duration-700 relative perspective-[1200px]">
       {/* Background vectors */}
-      <div ref={vectorRightRef} className="hidden lg:flex absolute right-0 top-0 group">
+      <div ref={vectorRightRef} className="hidden lg:flex absolute right-0 top-0">
         <img src="/images/Vector.png" alt="" className="transition-transform duration-500 ease-in-out" />
       </div>
-      <div ref={vectorLeftRef} className="hidden xl:flex absolute left-0 bottom-0 group">
+      <div ref={vectorLeftRef} className="hidden xl:flex absolute left-0 bottom-0">
         <img src="/images/Vector2.png" alt="" className="transition-transform duration-500 ease-in-out group-hover:-rotate-6" />
       </div>
 
@@ -101,7 +101,7 @@ const Hero = () => {
 
             {/* Intro */}
             <div ref={(el) => (elementsRef.current[1] = el)}>
-              <p className="font-medium text-lg md:text-[24px] text-gray-900 dark:text-white tracking-tight">Hi, I’m George 👋</p>
+              <p className="font-medium text-lg md:text-[24px] text-gray-900 dark:text-white tracking-tight">Hi, I'm George 👋</p>
             </div>
 
             {/* Heading */}

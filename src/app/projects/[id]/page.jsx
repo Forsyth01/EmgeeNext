@@ -24,17 +24,12 @@ export default function ProjectDetail({ params }) {
   const project = projects.find((p) => p.id === parseInt(id));
 
   const [lightboxImg, setLightboxImg] = useState(null);
-  const [loadedImages, setLoadedImages] = useState({}); // Track which images are loaded
 
   // Disable scroll when lightbox is open
   useEffect(() => {
     document.body.style.overflow = lightboxImg ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
   }, [lightboxImg]);
-
-  const handleImageLoad = (idx) => {
-    setLoadedImages((prev) => ({ ...prev, [idx]: true }));
-  };
 
   if (!project) {
     return (
@@ -57,10 +52,10 @@ export default function ProjectDetail({ params }) {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-2xl font-semibold tracking-tighter text-black dark:text-white">
-            {project.title || <Skeleton width="200px" height="28px" />}
+            {project.title}
           </h1>
           <p className="md:text-xl text-sm text-gray-700 dark:text-gray-300">
-            {project.date || <Skeleton width="100px" height="20px" />}
+            {project.date}
           </p>
         </motion.div>
 
@@ -72,7 +67,7 @@ export default function ProjectDetail({ params }) {
           transition={{ duration: 0.7 }}
         >
           <p className="text-xl text-gray-800 dark:text-gray-300">
-            {project.description || <Skeleton width="80%" height="20px" />}
+            {project.description}
           </p>
 
           <div className="flex items-center gap-2 flex-wrap mt-2 md:mt-0">
@@ -87,21 +82,17 @@ export default function ProjectDetail({ params }) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
               >
-                {tool.icon ? (
-                  loadedImages[`tool-${idx}`] ? (
-                    <Image
-                      src={tool.icon}
-                      alt={tool.name}
-                      width={16}
-                      height={16}
-                      className="object-contain"
-                      onLoad={() => handleImageLoad(`tool-${idx}`)}
-                    />
-                  ) : (
-                    <Skeleton width="16px" height="16px" />
-                  )
-                ) : null}
-                <span className="text-black dark:text-white">{tool.name || <Skeleton width="40px" height="12px" />}</span>
+                {tool.icon && (
+                  <Image
+                    src={tool.icon}
+                    alt={tool.name}
+                    width={16}
+                    height={16}
+                    className="object-contain"
+                    loading="lazy"
+                  />
+                )}
+                <span className="text-black dark:text-white">{tool.name}</span>
               </motion.div>
             ))}
           </div>
@@ -125,7 +116,7 @@ export default function ProjectDetail({ params }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
-              {role || <Skeleton width="80px" height="16px" />}
+              {role}
             </motion.span>
           ))}
         </motion.div>
@@ -147,7 +138,7 @@ export default function ProjectDetail({ params }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {project.roleDescription || <Skeleton width="90%" height="16px" />}
+              {project.roleDescription}
             </motion.p>
           </motion.div>
         )}
@@ -169,17 +160,15 @@ export default function ProjectDetail({ params }) {
                 variants={imgVariant}
                 onClick={() => setLightboxImg(img.src)}
               >
-                {!loadedImages[`img-${idx}`] && <Skeleton className="absolute inset-0 w-full h-full" />}
                 <Image
                   src={img.src}
                   alt={`${project.title} ${idx + 1}`}
                   width={img.span ? 1920 : 1200}
                   height={img.span ? 1080 : 720}
                   sizes={img.span ? "100vw" : "(max-width: 768px) 100vw, 90vw"}
-                  priority={idx === 0}
-                  loading={idx === 0 ? "eager" : "lazy"}
+                  priority={idx === 0} // First image loads eagerly
+                  loading={idx === 0 ? "eager" : "lazy"} // Others lazy
                   className="w-full h-auto object-cover"
-                  onLoad={() => handleImageLoad(`img-${idx}`)}
                 />
               </motion.div>
             ))
@@ -191,7 +180,6 @@ export default function ProjectDetail({ params }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
             >
-              {!loadedImages.cover && <Skeleton className="absolute inset-0 w-full h-full" />}
               <Image
                 src={project.coverImage}
                 alt={project.title}
@@ -199,16 +187,14 @@ export default function ProjectDetail({ params }) {
                 height={720}
                 sizes="(max-width: 768px) 100vw, 90vw"
                 priority
-                loading="eager"
+                loading="lazy"
                 className="w-full h-auto object-cover"
-                onLoad={() => handleImageLoad("cover")}
               />
             </motion.div>
           )}
         </motion.div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImg && (
           <motion.div
@@ -218,33 +204,33 @@ export default function ProjectDetail({ params }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            onClick={() => setLightboxImg(null)}
           >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxImg(null);
-              }}
-              className="absolute top-10 right-5 md:right-[5%] text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 transition z-50"
+            {/* Outer click area (container surrounding the image) */}
+            <div
+              className="absolute flex items-center justify-center inset-0"
+              onClick={() => setLightboxImg(null)}
             >
-              <X size={20} />
-            </button>
+              {/* Inner box to stop propagation (the actual image) */}
+              <div
+                className="relative w-[90vw] h-[90vh]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Cancel Button inside the image container */}
+                <button
+                  onClick={() => setLightboxImg(null)}
+                  className="absolute top-5 right-5 text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 z-50"
+                >
+                  <X size={20} />
+                </button>
 
-            <motion.div
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 50 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative w-[90vw] h-[90vh]"
-            >
-              <Image
-                src={lightboxImg}
-                alt="Enlarged view"
-                fill
-                className="object-contain rounded-lg shadow-lg pointer-events-none"
-              />
-            </motion.div>
+                <Image
+                  src={lightboxImg}
+                  alt="Enlarged view"
+                  fill
+                  className="object-contain rounded-lg shadow-lg pointer-events-none"
+                />
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -260,11 +246,3 @@ export default function ProjectDetail({ params }) {
     </div>
   );
 }
-
-// Simple Skeleton component
-const Skeleton = ({ width = "100%", height = "16px", className = "" }) => (
-  <div
-    className={`bg-gray-300 dark:bg-gray-700 animate-pulse rounded ${className}`}
-    style={{ width, height }}
-  />
-);
