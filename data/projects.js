@@ -35,7 +35,74 @@ These designs made the app more versatile, bridging everyday food needs with sma
     link: "https://myportfolio.com",
     date: "March, 2025",
   },
+  {
+    id: 11,
+    title: "Artist Profile Design",
+    description: "Finn YMD (Graphic Design)",
+    coverImage: "/images/projects/artist/artist1.png",
+    images: [
+      { src: "/images/projects/artist/artist1.png", span: true },
+      { src: "/images/projects/artist/artist2.png", span: true },
+      { src: "/images/projects/artist/artist3.png", span: true },
+      { src: "/images/projects/artist/artist4.png", span: true },
+      { src: "/images/projects/artist/artist5.png", span: true },
+      { src: "/images/projects/artist/artist6.png", span: true },
+      { src: "/images/projects/artist/artist7.png", span: true },
+      { src: "/images/projects/artist/artist8.png", span: true },
+      { src: "/images/projects/artist/artist9.png", span: true },
+      { src: "/images/projects/artist/artist10.png", span: true },
+      { src: "/images/projects/artist/artist11.png", span: true },
+      { src: "/images/projects/artist/artist12.png", span: true },
+    ],
+    roles: ["UI/UX Designer"],
+    tools: [
+      { name: "Figma", icon: "/assets/icons/figma.png" },
+      // { name: "CorelDRAW", icon: "/assets/icons/coreldraw.png" },
+    ],
+    roleDescription:
+      "I designed a professional artist profile for Finn YMD, which included his biography, discography, and other essential details. The design provided a clean and engaging way to present the artist’s journey and music catalog, blending both branding and storytelling.",
+    link: "https://myportfolio.com",
+    date: "March, 2025",
+  },
+  {
+    id: 10,
+    title: "Skillet",
+    description: "Concept Design (UI/UX)",
+    coverImage: "/images/projects/skillet/skillet.png",
+    images: [
+      { src: "/images/projects/skillet/skillet1.png", span: true },
+      { src: "/images/projects/skillet/skillet2.png", span: true },
+      { src: "/images/projects/skillet/skillet3.png", span: true },
+    ],
+    roles: ["UI/UX Designer"],
+    tools: [{ name: "Figma", icon: "/assets/icons/figma.png" },],
+    roleDescription:
+      "Skillet is a personal project I developed to practice and showcase my UI/UX design skills. I designed the concept end-to-end, ensuring it reflects my ability to craft user-friendly, modern interfaces while experimenting with creative layouts and visual storytelling.",
+    link: "https://embdashboard.com",
+    date: "March, 2025",
+  },
 
+
+
+
+  {
+    id: 4,
+    title: "Mintrix Admin Panel",
+    description: "Admin Dashboard (UI/UX Design)",
+    coverImage: "/images/projects/mintrixadmin.png",
+    images: [
+      { src: "/images/projects/mintrix1.png", span: true },
+      { src: "/images/projects/mintrix2.png", span: false },
+      { src: "/images/projects/mintrix3.png", span: false },
+      { src: "/images/projects/mintrix4.png", span: true },
+    ],
+    roles: ["UI/UX Designer"],
+    tools: [{ name: "Figma", icon: "/assets/icons/figma.png" }],
+    roleDescription:
+      "As a continuation of the mobile app, I also designed the Mintrix Trade Admin Dashboard. The dashboard mirrors the functionality of the mobile app but from the administrative perspective. It allows admins to manage user accounts, monitor transactions, process trades, and oversee services like bill payments and flight bookings. I ensured the dashboard maintained the same design consistency and usability as the mobile app, while giving admins the tools they need for smooth operations.",
+    link: "https://myweatherapp.com",
+    date: "May, 2025",
+  },
   {
     id: 2,
     title: "Mintrix Trade App",
@@ -65,44 +132,23 @@ These designs made the app more versatile, bridging everyday food needs with sma
     link: "https://myportfolio.com",
     date: "March, 2025",
   },
-
-{
-  id: 3,
-  title: "Pozse",
-  description: "Landing Page (UI/UX Design)",
-  coverImage: "/images/projects/posze.png",
-  images: [
-    { src: "/images/projects/pozse/pozse1.png", span: true },
-    { src: "/images/projects/pozse/pozse2.png", span: true },
-    { src: "/images/projects/pozse/pozse3.png", span: true },
-    { src: "/images/projects/pozse/pozse4.png", span: true }
-  ],
-  roles: ["UI/UX Designer"],
-  tools: [{ name: "Figma", icon: "/assets/icons/figma.png" }],
-  roleDescription: `Pozse is a brand that merges fashion and technology. I designed their landing page, which served as the first digital touchpoint for the brand. The landing page not only showcased the brand’s vision but also included a waitlist form to collect early sign-ups and build community interest ahead of their main product launch (a social media app and other extensions). The design helped position Pozse as both innovative and stylish.`,
-  link: "https://myecommerce.com",
-  date: "July, 2024",
-},
-
   {
-    id: 4,
-    title: "Mintrix Admin Panel",
-    description: "Admin Dashboard (UI/UX Design)",
-    coverImage: "/images/projects/mintrixadmin.png",
+    id: 3,
+    title: "Pozse",
+    description: "Landing Page (UI/UX Design)",
+    coverImage: "/images/projects/posze.png",
     images: [
-      { src: "/images/projects/mintrix1.png", span: true },
-      { src: "/images/projects/mintrix2.png", span: false },
-      { src: "/images/projects/mintrix3.png", span: false },
-      { src: "/images/projects/mintrix4.png", span: true },
+      { src: "/images/projects/pozse/pozse1.png", span: true },
+      { src: "/images/projects/pozse/pozse2.png", span: true },
+      { src: "/images/projects/pozse/pozse3.png", span: true },
+      { src: "/images/projects/pozse/pozse4.png", span: true }
     ],
     roles: ["UI/UX Designer"],
     tools: [{ name: "Figma", icon: "/assets/icons/figma.png" }],
-    roleDescription:
-      "As a continuation of the mobile app, I also designed the Mintrix Trade Admin Dashboard. The dashboard mirrors the functionality of the mobile app but from the administrative perspective. It allows admins to manage user accounts, monitor transactions, process trades, and oversee services like bill payments and flight bookings. I ensured the dashboard maintained the same design consistency and usability as the mobile app, while giving admins the tools they need for smooth operations.",
-    link: "https://myweatherapp.com",
-    date: "May, 2025",
+    roleDescription: `Pozse is a brand that merges fashion and technology. I designed their landing page, which served as the first digital touchpoint for the brand. The landing page not only showcased the brand’s vision but also included a waitlist form to collect early sign-ups and build community interest ahead of their main product launch (a social media app and other extensions). The design helped position Pozse as both innovative and stylish.`,
+    link: "https://myecommerce.com",
+    date: "July, 2024",
   },
-
   {
     id: 5,
     title: "Geniz Global",
@@ -129,7 +175,7 @@ These designs made the app more versatile, bridging everyday food needs with sma
     date: "March, 2025",
   },
 
-                                             
+
   {
     id: 6,
     title: "Textworld.co",
@@ -222,50 +268,6 @@ These designs made the app more versatile, bridging everyday food needs with sma
     link: "https://embdashboard.com",
     date: "March, 2025",
   },
-  {
-    id: 10,
-    title: "Skillet",
-    description: "Concept Design (UI/UX)",
-    coverImage: "/images/projects/skillet/skillet.png",
-    images: [
-      { src: "/images/projects/skillet/skillet1.png", span: true },
-      { src: "/images/projects/skillet/skillet2.png", span: true },
-      { src: "/images/projects/skillet/skillet3.png", span: true },
-    ],
-    roles: ["UI/UX Designer"],
-    tools: [{ name: "Figma", icon: "/assets/icons/figma.png" },],
-    roleDescription:
-      "Skillet is a personal project I developed to practice and showcase my UI/UX design skills. I designed the concept end-to-end, ensuring it reflects my ability to craft user-friendly, modern interfaces while experimenting with creative layouts and visual storytelling.",
-    link: "https://embdashboard.com",
-    date: "March, 2025",
-  },
-  {
-    id: 11,
-    title: "Artist Profile Design",
-    description: "Finn YMD (Graphic Design)",
-    coverImage: "/images/projects/artist/artist1.png",
-    images: [
-      { src: "/images/projects/artist/artist1.png", span: true },
-      { src: "/images/projects/artist/artist2.png", span: true },
-      { src: "/images/projects/artist/artist3.png", span: true },
-      { src: "/images/projects/artist/artist4.png", span: true },
-      { src: "/images/projects/artist/artist5.png", span: true },
-      { src: "/images/projects/artist/artist6.png", span: true },
-      { src: "/images/projects/artist/artist7.png", span: true },
-      { src: "/images/projects/artist/artist8.png", span: true },
-      { src: "/images/projects/artist/artist9.png", span: true },
-      { src: "/images/projects/artist/artist10.png", span: true },
-      { src: "/images/projects/artist/artist11.png", span: true },
-      { src: "/images/projects/artist/artist12.png", span: true },
-    ],
-    roles: ["UI/UX Designer"],
-    tools: [
-      { name: "Figma", icon: "/assets/icons/figma.png" },
-      // { name: "CorelDRAW", icon: "/assets/icons/coreldraw.png" },
-    ],
-    roleDescription:
-      "I designed a professional artist profile for Finn YMD, which included his biography, discography, and other essential details. The design provided a clean and engaging way to present the artist’s journey and music catalog, blending both branding and storytelling.",
-    link: "https://myportfolio.com",
-    date: "March, 2025",
-  },
+
+
 ];
