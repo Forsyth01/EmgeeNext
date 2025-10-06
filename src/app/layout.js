@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { Footer } from "@/components";
 
 // --- Font ---
 const poppins = Poppins({
@@ -43,7 +44,9 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={`${poppins.variable} antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>{children}
+          <Footer/>
+        </ThemeProvider>
       </body>
     </html>
   );

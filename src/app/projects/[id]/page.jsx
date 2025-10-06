@@ -166,8 +166,8 @@ export default function ProjectDetail({ params }) {
                   width={img.span ? 1920 : 1200}
                   height={img.span ? 1080 : 720}
                   sizes={img.span ? "100vw" : "(max-width: 768px) 100vw, 90vw"}
-                  priority={idx === 0} // First image loads eagerly
-                  loading={idx === 0 ? "eager" : "lazy"} // Others lazy
+                  priority={idx === 0}
+                  loading={idx === 0 ? "eager" : "lazy"}
                   className="w-full h-auto object-cover"
                 />
               </motion.div>
@@ -195,6 +195,7 @@ export default function ProjectDetail({ params }) {
         </motion.div>
       </div>
 
+      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImg && (
           <motion.div
@@ -204,32 +205,26 @@ export default function ProjectDetail({ params }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
+            onClick={() => setLightboxImg(null)} // click anywhere to close
           >
-            {/* Outer click area (container surrounding the image) */}
             <div
-              className="absolute flex items-center justify-center inset-0"
-              onClick={() => setLightboxImg(null)}
+              className="relative w-[90vw] h-[90vh]"
+              onClick={(e) => e.stopPropagation()} // prevent image click from closing
             >
-              {/* Inner box to stop propagation (the actual image) */}
-              <div
-                className="relative w-[90vw] h-[90vh]"
-                onClick={(e) => e.stopPropagation()}
+              {/* X button */}
+              <button
+                onClick={() => setLightboxImg(null)}
+                className="absolute top-5 right-5 text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 z-50"
               >
-                {/* Cancel Button inside the image container */}
-                <button
-                  onClick={() => setLightboxImg(null)}
-                  className="absolute top-5 right-5 text-2xl p-2 rounded-full bg-white text-black hover:bg-opacity-20 z-50"
-                >
-                  <X size={20} />
-                </button>
+                <X size={20} />
+              </button>
 
-                <Image
-                  src={lightboxImg}
-                  alt="Enlarged view"
-                  fill
-                  className="object-contain rounded-lg shadow-lg pointer-events-none"
-                />
-              </div>
+              <Image
+                src={lightboxImg}
+                alt="Enlarged view"
+                fill
+                className="object-contain rounded-lg shadow-lg pointer-events-none"
+              />
             </div>
           </motion.div>
         )}

@@ -1,3 +1,5 @@
+"use client"; 
+
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -104,7 +106,7 @@ const Connectwithme = () => {
         {/* Contact Box */}
           <div className="h-[180px] flex flex-col justify-end">
         <div className=" bg-[#F6F6F3] dark:bg-[#222222] px-4 py-6 rounded-2xl ">
-          <div className="flex xl:block lg:flex items-center gap-4">
+          <div className="flex xl:flex items-center gap-4">
           <div className="">
             <img src="/images/envelope.png" alt="Contact" className="md:h-8 lg:h-12 md:h-12 " />
           </div>

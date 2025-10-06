@@ -23,8 +23,11 @@ export const projects = [
     ],
     roleDescription:
       `I contributed to the design of Dailyfood, a food vending and marketplace app. While I wasn’t responsible for the entire product, I designed key features that added unique value to the platform:
+
 - Asusu Feature: A savings subscription that allows users to plan and save toward bulk food purchases like a carton of noodles, a bag of rice, or semo. Plans included Flex Combo, Flex Pro, Super Flex, and Super Pro.
+
 - Food Subscription Plans: Weekly and monthly subscription options for convenient meal planning.
+
 - AI Features: Designed twin AI features – AI Meal Plan and AI Suggestion – to personalize user experiences and help users discover or plan meals.
 
 These designs made the app more versatile, bridging everyday food needs with smart financial planning.
