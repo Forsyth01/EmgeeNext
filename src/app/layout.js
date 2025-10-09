@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 // --- Metadata (SEO, favicon, etc.) ---
 export const metadata = {
-  title: "George",
+  title: "George", 
   description:
     "George is a UI/UX designer and graphic designer with 5 years of experience creating engaging, user-focused digital and visual designs.",
   icons: {
@@ -21,7 +21,7 @@ export const metadata = {
 };
    
 export default function RootLayout({ children }) {
-  return (
+  return ( 
     <html lang="en">
       <head>
          <link rel="icon" href="/favicon.png" sizes="any" />
