@@ -3,6 +3,45 @@
 
 export const projects = [
   {
+    id: 21,
+    title: "Favour Simon Portfolio",
+    description: "Favour Simon Portfolio Website (UI/UX Design)",
+    coverImage: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio.png",
+    images: [
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio1.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio2.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio3.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio4.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio5.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio6.png", span: true },
+    ],
+    roles: ["UI/UX Designer"],
+    tools: [
+      { name: "Figma", icon: "/assets/icons/figma.png" },
+      // { name: "CorelDRAW", icon: "/assets/icons/coreldraw.png" },
+    ],
+    roleDescription:
+      `I designed a modern and responsive portfolio landing page for a web developer, focusing on clear presentation of skills, projects, and contact information. The goal was to create a personal brand identity that reflects professionalism and creativity while maintaining simple navigation and strong visual hierarchy.
+
+Key Features:
+
+- Clean, minimalist layout for easy readability.
+
+- Hero section with developer introduction and call-to-action.
+
+- Project showcase with hover interactions.
+
+- Skills and tools section using icons and subtle animations.
+
+- Contact form and footer with social links.
+
+The design emphasizes usability and visual balance, ensuring that visitors can quickly understand the developer’s expertise and access key information.
+`,
+    link: "https://myportfolio.com",
+    date: "March, 2025",
+  },
+  {
     id: 1,
     title: "Daily Food",
     description: "Food Vendor & Marketplace App (UI/UX Design)",
