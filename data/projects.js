@@ -6,7 +6,7 @@ export const projects = [
     id: 21,
     title: "Favour Simon Portfolio",
     description: "Favour Simon Portfolio Website (UI/UX Design)",
-    coverImage: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio.png",
+    coverImage: "/images/projects/FavourSimonPortfolio/FavourSimonPortfoliocover.png",
     images: [
       { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio.png", span: true },
       { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio1.png", span: true },
@@ -242,28 +242,28 @@ These designs made the app more versatile, bridging everyday food needs with sma
     date: "March, 2025",
   },
 
-  {
-    id: 7,
-    title: "EMB Telecom",
-    description: "UI Revamp for EMB Telecomms",
-    coverImage: "/images/projects/emb.png",
-    images: [
-      { src: "/images/projects/emb/emb3.png", span: true },
-      { src: "/images/projects/emb/emb1.png", span: true },
-      { src: "/images/projects/emb/emb2.png", span: true },
-      { src: "/images/projects/emb/emb4.png", span: true },
-      { src: "/images/projects/emb/emb5.png", span: true },
-    ],
-    roles: ["UI/UX Designer"],
-    tools: [
-      { name: "Figma", icon: "/assets/icons/figma.png" },
-      // { name: "Photoshop", icon: "/assets/icons/photoshop.png" },
-    ],
-    roleDescription:
-      "Led the UI revamp of the telecom dashboard, ensuring better user flows and an updated design system.",
-    link: "https://embdashboard.com",
-    date: "March, 2025",
-  },
+  // {
+  //   id: 7,
+  //   title: "EMB Telecom",
+  //   description: "UI Revamp for EMB Telecomms",
+  //   coverImage: "/images/projects/emb.png",
+  //   images: [
+  //     { src: "/images/projects/emb/emb3.png", span: true },
+  //     { src: "/images/projects/emb/emb1.png", span: true },
+  //     { src: "/images/projects/emb/emb2.png", span: true },
+  //     { src: "/images/projects/emb/emb4.png", span: true },
+  //     { src: "/images/projects/emb/emb5.png", span: true },
+  //   ],
+  //   roles: ["UI/UX Designer"],
+  //   tools: [
+  //     { name: "Figma", icon: "/assets/icons/figma.png" },
+  //     // { name: "Photoshop", icon: "/assets/icons/photoshop.png" },
+  //   ],
+  //   roleDescription:
+  //     "Led the UI revamp of the telecom dashboard, ensuring better user flows and an updated design system.",
+  //   link: "https://embdashboard.com",
+  //   date: "March, 2025",
+  // },
 
   {
     id: 8,
@@ -286,6 +286,24 @@ These designs made the app more versatile, bridging everyday food needs with sma
       "For iProspa, a brand that trades crypto and gift cards to naira, I handled the graphic design for their social media flyers. The designs were visually striking, aligned with their brand identity, and effectively communicated their services to their target audience.",
     link: "https://embdashboard.com",
     date: "March, 2025",
+  },
+  {
+    id: 18,
+    title: "MyBitDuit",
+    description: "A web platform that converts Gold, Silver, and Bitcoin...",
+    coverImage: "/images/projects/MyBitDuit/MyBitDuitcover.png",
+    images: [
+      { src: "/images/projects/MyBitDuit/MyBitDuit.png", span: true },
+    ],
+    roles: ["Graphic Designer"],
+    tools: [
+      // { name: "Figma", icon: "/assets/icons/figma.png" },
+      { name: "Figma", icon: "/assets/icons/figma.png" },
+    ],
+    roleDescription:
+      "A web platform that converts Gold, Silver, and Bitcoin into Malaysian Ringgit with a simple and user-friendly interface.",
+    // link: "https://embdashboard.com",
+    // date: "March, 2025",
   },
 
   {

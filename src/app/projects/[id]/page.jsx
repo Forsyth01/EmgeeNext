@@ -154,7 +154,7 @@ export default function ProjectDetail({ params }) {
             project.images.map((img, idx) => (
               <motion.div
                 key={idx}
-                className={`rounded-lg shadow-lg overflow-hidden relative mb-4 cursor-pointer ${
+                className={` overflow-hidden relative cursor-pointer ${
                   img.span ? "col-span-1 md:col-span-2" : "col-span-1"
                 }`}
                 variants={imgVariant}
@@ -174,7 +174,7 @@ export default function ProjectDetail({ params }) {
             ))
           ) : (
             <motion.div
-              className="w-full rounded-lg shadow-lg cursor-pointer relative mb-4"
+              className="w-full  cursor-pointer relative "
               onClick={() => setLightboxImg(project.coverImage)}
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
