@@ -216,7 +216,7 @@ These designs made the app more versatile, bridging everyday food needs with sma
 
 
   {
-    id: 6,
+    id: 6, 
     title: "Textworld.co",
     description: "Social Media Flyers for a SaaS Brand",
     coverImage: "/images/projects/textworld.png",
