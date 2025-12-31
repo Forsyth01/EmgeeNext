@@ -8,8 +8,8 @@ export const projects = [
     description: "Favour Simon Portfolio Website (UI/UX Design)",
     coverImage: "/images/projects/FavourSimonPortfolio/FavourSimonPortfoliocover.png",
     images: [
-      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio.png", span: true },
       { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio1.png", span: true },
+      { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio.png", span: true },
       { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio2.png", span: true },
       { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio3.png", span: true },
       { src: "/images/projects/FavourSimonPortfolio/FavourSimonPortfolio4.png", span: true },
